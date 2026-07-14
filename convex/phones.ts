@@ -1,45 +1,46 @@
 import { query } from "./_generated/server"
 import { v } from "convex/values"
 
-// Get all phones with latest prices
 export const list = query({
   args: { brand: v.optional(v.string()), limit: v.number() },
   handler: async (ctx, args) => {
-    let phonesQuery = ctx.db.query("phones")
-
-    const allPhones = await phonesQuery.collect()
+    let allPhones = await ctx.db.query("phones").collect()
 
     // Filter by brand if provided
-    const filtered = args.brand
-      ? allPhones.filter((p) => p.brand.toLowerCase() === args.brand.toLowerCase())
-      : allPhones
+    if (args.brand) {
+      allPhones = allPhones.filter(
+        (p) => p.brand.toLowerCase() === args.brand!.toLowerCase()
+      )
+    }
 
     // Sort by brand then model
-    const sorted = filtered.sort((a, b) => {
+    allPhones.sort((a, b) => {
       if (a.brand !== b.brand) return a.brand.localeCompare(b.brand)
       return a.model.localeCompare(b.model)
     })
 
-    const limit = args.limit || sorted.length
+    const limit = args.limit ?? allPhones.length
+    const phonesSlice = allPhones.slice(0, limit)
 
     // Join with latest price and review for each phone
     const withDetails = await Promise.all(
-      sorted.slice(0, limit).map(async (phone) => {
-        // Get latest price
-        const prices = await ctx.db
-          .query("prices")
+      phonesSlice.map(async (phone) => {
+        // Get latest price using correct filter syntax
+        const allPrices = await ctx.db.query("prices").collect()
+        const phonePrices = allPrices
           .filter((p) => p.phoneId === phone._id)
-          .collect()
-        const latestPrice = prices.sort((a, b) => b.recordedAt - a.recordedAt)[0]
+          .sort((a, b) => b.recordedAt - a.recordedAt)
+        const latestPrice = phonePrices[0] ?? null
 
         // Get average rating
-        const reviews = await ctx.db
-          .query("reviews")
-          .filter((r) => r.phoneId === phone._id && r.status === "published")
-          .collect()
-        const avgRating = reviews.length
-          ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
-          : null
+        const allReviews = await ctx.db.query("reviews").collect()
+        const phoneReviews = allReviews.filter(
+          (r) => r.phoneId === phone._id && r.status === "published"
+        )
+        const avgRating =
+          phoneReviews.length
+            ? phoneReviews.reduce((sum, r) => sum + r.rating, 0) / phoneReviews.length
+            : null
 
         return {
           ...phone,
@@ -47,7 +48,7 @@ export const list = query({
             ? { amount: latestPrice.amount, source: latestPrice.source }
             : null,
           avgRating,
-          reviewCount: reviews.length,
+          reviewCount: phoneReviews.length,
         }
       })
     )
@@ -56,41 +57,32 @@ export const list = query({
   },
 })
 
-// Get single phone by slug
 export const getBySlug = query({
   args: { slug: v.string() },
   handler: async (ctx, args) => {
-    const phone = await ctx.db
-      .query("phones")
-      .filter((p) => p.slug === args.slug)
-      .unique()
-
+    const allPhones = await ctx.db.query("phones").collect()
+    const phone = allPhones.find((p) => p.slug === args.slug)
     if (!phone) return null
 
-    const specs = await ctx.db
-      .query("specs")
-      .filter((s) => s.phoneId === phone._id)
-      .unique()
+    const allSpecs = await ctx.db.query("specs").collect()
+    const specs = allSpecs.find((s) => s.phoneId === phone._id) ?? null
 
-    const prices = await ctx.db
-      .query("prices")
+    const allPrices = await ctx.db.query("prices").collect()
+    const prices = allPrices
       .filter((p) => p.phoneId === phone._id)
-      .order("desc", "recordedAt")
-      .take(10)
-      .collect()
+      .sort((a, b) => b.recordedAt - a.recordedAt)
+      .slice(0, 10)
 
-    const reviews = await ctx.db
-      .query("reviews")
+    const allReviews = await ctx.db.query("reviews").collect()
+    const reviews = allReviews
       .filter((r) => r.phoneId === phone._id && r.status === "published")
-      .order("desc", "publishedAt")
-      .take(5)
-      .collect()
+      .sort((a, b) => b.publishedAt - a.publishedAt)
+      .slice(0, 5)
 
     return { phone, specs, prices, reviews }
   },
 })
 
-// Get all brands
 export const listBrands = query({
   args: {},
   handler: async (ctx) => {
@@ -105,27 +97,32 @@ export const listBrands = query({
   },
 })
 
-// Get all phones grouped by price range
 export const listByPriceRange = query({
   args: { min: v.number(), max: v.number() },
   handler: async (ctx, args) => {
     const phones = await ctx.db.query("phones").collect()
+    const allPrices = await ctx.db.query("prices").collect()
 
     const results = await Promise.all(
       phones.map(async (phone) => {
-        const prices = await ctx.db
-          .query("prices")
+        const phonePrices = allPrices
           .filter((p) => p.phoneId === phone._id)
-          .collect()
-        const latestPrice = prices.sort((a, b) => b.recordedAt - a.recordedAt)[0]
+          .sort((a, b) => b.recordedAt - a.recordedAt)
+        const latestPrice = phonePrices[0]
 
-        if (latestPrice && latestPrice.amount >= args.min && latestPrice.amount <= args.max) {
+        if (
+          latestPrice &&
+          latestPrice.amount >= args.min &&
+          latestPrice.amount <= args.max
+        ) {
           return { ...phone, price: latestPrice.amount }
         }
         return null
       })
     )
 
-    return results.filter(Boolean).sort((a, b) => a!.price - b!.price)
+    return results
+      .filter((r): r is NonNullable<typeof r> => r !== null)
+      .sort((a, b) => a.price - b.price)
   },
 })
