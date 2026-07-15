@@ -1,5 +1,7 @@
 import { mutation } from "./_generated/server"
 
+const THUMB = (slug: string) => `/thumbs/${slug}.webp`
+
 const VERIFIED = [
   { slug: "tecno-spark-30-price-nigeria-specs-review", model: "Spark 30 Pro", price: 240000, source: "Jumia Nigeria", sourceUrl: "https://www.jumia.com.ng/spark-30-pro-6.78-128gb88gb-4g-sim-5000mah-black-tecno-mpg7996371.html" },
   { slug: "tecno-spark-20-price-nigeria-specs-review", model: "Spark 20", price: 259999, source: "Jumia Nigeria", sourceUrl: "https://www.jumia.com.ng/tecno-spark-20-6.6-256gb88gb-4g-dual-sim-5000mah-black-419600957.html" },
@@ -15,13 +17,15 @@ const VERIFIED = [
   { slug: "xiaomi-poco-x6-pro-price-nigeria-specs-review", model: "POCO X6 Pro", price: 669999, source: "Jumia Nigeria", sourceUrl: "https://www.jumia.com.ng/x6-pro-5g-6.67-512gb12gb-dual-sim-5000mah-grey-poco-mpg11144267.html" },
 ]
 
+// Pending = no exact Jumia/Konga/Pointek listing found; we show a verified
+// market RANGE sourced from other Nigerian price sources instead.
 const PENDING = [
-  { slug: "tecno-phantom-v-flip-price-nigeria-specs-review", model: "Phantom V Flip2 5G" },
-  { slug: "tecno-spark-go-2024-price-nigeria-specs-review", model: "Spark Go" },
-  { slug: "infinix-gt-20-pro-price-nigeria-specs-review", model: "GT 20 Pro" },
-  { slug: "oppo-reno-11-price-nigeria-specs-review", model: "Reno 11 Pro" },
-  { slug: "oppo-a58-price-nigeria-specs-review", model: "A58" },
-  { slug: "realme-note-60-price-nigeria-specs-review", model: "Note 60" },
+  { slug: "tecno-phantom-v-flip-price-nigeria-specs-review", model: "Phantom V Flip2 5G", rangeLabel: "₦869,500–₦1,053,285", rangeSource: "Buy Fast Gadgets / Electrorates (NG)", rangeSourceUrl: "https://buyfastgadgets.ng/product/tecno-phantom-v-flip2-5g-256gb-8gb/" },
+  { slug: "tecno-spark-go-2024-price-nigeria-specs-review", model: "Spark Go 2024", rangeLabel: "₦141,400", rangeSource: "MobGadgets (NG)", rangeSourceUrl: "https://mobgadgets.com/gadget/ng/tecno-spark-go-2024" },
+  { slug: "infinix-gt-20-pro-price-nigeria-specs-review", model: "GT 20 Pro", rangeLabel: "₦366,000–₦685,000", rangeSource: "AssuredZone / Hardware Village (NG)", rangeSourceUrl: "https://www.assuredzone.com/ng/infinix-gt-20-pro-price-in-nigeria/" },
+  { slug: "oppo-reno-11-price-nigeria-specs-review", model: "Reno 11 Pro", rangeLabel: "₦160,000–₦460,000", rangeSource: "NaijaPhonePrice / MobileInto (NG)", rangeSourceUrl: "https://naijaphoneprice.com.ng/oppo-reno-11-pro-price-in-nigeria/" },
+  { slug: "oppo-a58-price-nigeria-specs-review", model: "A58", rangeLabel: "₦188,000–₦416,000", rangeSource: "GSMArena NG / Oshilolo (NG)", rangeSourceUrl: "https://www.gsmarena.com.ng/mobiles/oppo-a58-4g/" },
+  { slug: "realme-note-60-price-nigeria-specs-review", model: "Note 60", rangeLabel: "₦80,000–₦160,000", rangeSource: "GSMArena NG / AssuredZone (NG)", rangeSourceUrl: "https://www.gsmarena.ng/product/realme-note-60/" },
 ]
 
 export const syncVerifiedData = mutation({
@@ -35,9 +39,14 @@ export const syncVerifiedData = mutation({
       const phone = bySlug.get(item.slug)
       if (!phone) continue
 
-      if (phone.model !== item.model) {
-        await ctx.db.patch(phone._id, { model: item.model, updatedAt: Date.now() })
-      }
+      await ctx.db.patch(phone._id, {
+        model: item.model,
+        imageUrl: THUMB(item.slug),
+        priceRangeLabel: undefined,
+        priceRangeSource: undefined,
+        priceRangeSourceUrl: undefined,
+        updatedAt: Date.now(),
+      })
 
       for (const price of prices.filter((p) => p.phoneId === phone._id)) {
         await ctx.db.delete(price._id)
@@ -59,9 +68,14 @@ export const syncVerifiedData = mutation({
       for (const price of prices.filter((p) => p.phoneId === phone._id)) {
         await ctx.db.delete(price._id)
       }
-      if (phone.model !== item.model) {
-        await ctx.db.patch(phone._id, { model: item.model, updatedAt: Date.now() })
-      }
+      await ctx.db.patch(phone._id, {
+        model: item.model,
+        imageUrl: THUMB(item.slug),
+        priceRangeLabel: item.rangeLabel,
+        priceRangeSource: item.rangeSource,
+        priceRangeSourceUrl: item.rangeSourceUrl,
+        updatedAt: Date.now(),
+      })
     }
 
     return { success: true, priced: VERIFIED.length, pending: PENDING.length }

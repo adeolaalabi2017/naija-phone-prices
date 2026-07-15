@@ -6,6 +6,8 @@ export interface PhoneListing {
   model: string
   slug: string
   price: number
+  priceRange?: string
+  imageUrl?: string
   rating?: number
   specs: {
     ram: string
@@ -16,28 +18,28 @@ export interface PhoneListing {
 }
 
 export const databasePhones: PhoneListing[] = [
-  { brand: "Tecno", model: "Spark 30 Pro", slug: "tecno-spark-30-price-nigeria-specs-review", price: 240000, rating: 8.2, specs: { ram: "8GB", storage: "256GB", battery: "5000mAh", display: "6.67 inches, AMOLED, 120Hz" } },
-  { brand: "Tecno", model: "Spark 20", slug: "tecno-spark-20-price-nigeria-specs-review", price: 259999, rating: 7.8, specs: { ram: "8GB", storage: "256GB", battery: "5000mAh", display: "6.6 inches, IPS LCD, 90Hz" } },
-  { brand: "Tecno", model: "Camon 30", slug: "tecno-camon-30-price-nigeria-specs-review", price: 409999, rating: 8.1, specs: { ram: "12GB", storage: "256GB", battery: "5000mAh", display: "6.78 inches, AMOLED, 120Hz" } },
-  { brand: "Tecno", model: "Phantom V Flip2 5G", slug: "tecno-phantom-v-flip-price-nigeria-specs-review", price: 0, specs: { ram: "8GB", storage: "256GB", battery: "4000mAh", display: "6.9 inches, Foldable AMOLED, 120Hz" } },
-  { brand: "Tecno", model: "Spark Go", slug: "tecno-spark-go-2024-price-nigeria-specs-review", price: 0, specs: { ram: "3GB", storage: "64GB", battery: "5000mAh", display: "6.6 inches, IPS LCD, 90Hz" } },
-  { brand: "Tecno", model: "Pop 9", slug: "tecno-pop-9-price-nigeria-specs-review", price: 165000, specs: { ram: "3GB", storage: "128GB", battery: "5000mAh", display: "6.67 inches, IPS LCD, 90Hz" } },
-  { brand: "Infinix", model: "Note 40 Pro", slug: "infinix-note-40-pro-price-nigeria-specs-review", price: 469999, rating: 8.0, specs: { ram: "8GB", storage: "256GB", battery: "4600mAh", display: "6.78 inches, AMOLED, 120Hz" } },
-  { brand: "Infinix", model: "Hot 40i", slug: "infinix-hot-40i-price-nigeria-specs-review", price: 259999, specs: { ram: "8GB", storage: "128GB", battery: "5000mAh", display: "6.56 inches, IPS LCD, 90Hz" } },
-  { brand: "Infinix", model: "GT 20 Pro", slug: "infinix-gt-20-pro-price-nigeria-specs-review", price: 0, rating: 8.7, specs: { ram: "12GB", storage: "256GB", battery: "5000mAh", display: "6.67 inches, AMOLED, 144Hz" } },
-  { brand: "Infinix", model: "Smart 8", slug: "infinix-smart-8-pro-price-nigeria-specs-review", price: 131999, specs: { ram: "3GB", storage: "64GB", battery: "5000mAh", display: "6.6 inches, IPS LCD, 90Hz" } },
-  { brand: "Samsung", model: "Galaxy A16 5G", slug: "samsung-galaxy-a16-5g-price-nigeria-specs-review", price: 309999, rating: 8.5, specs: { ram: "4GB", storage: "128GB", battery: "5000mAh", display: "6.7 inches, Super AMOLED, 90Hz" } },
-  { brand: "Samsung", model: "Galaxy A06", slug: "samsung-galaxy-a06-price-nigeria-specs-review", price: 118960, specs: { ram: "4GB", storage: "64GB", battery: "5000mAh", display: "6.7 inches, PLS LCD, 60Hz" } },
-  { brand: "Samsung", model: "Galaxy S24 FE", slug: "samsung-galaxy-s24-fe-price-nigeria-specs-review", price: 980000, rating: 9.0, specs: { ram: "8GB", storage: "256GB", battery: "4700mAh", display: "6.7 inches, Dynamic AMOLED 2X, 120Hz" } },
-  { brand: "Xiaomi", model: "Redmi Note 14", slug: "xiaomi-redmi-note-14-price-nigeria-specs-review", price: 349999, rating: 8.4, specs: { ram: "6GB", storage: "128GB", battery: "5110mAh", display: "6.67 inches, AMOLED, 120Hz" } },
-  { brand: "Xiaomi", model: "Redmi 14C", slug: "xiaomi-redmi-14c-price-nigeria-specs-review", price: 245000, specs: { ram: "8GB", storage: "256GB", battery: "5160mAh", display: "6.88 inches, IPS LCD, 120Hz" } },
-  { brand: "Xiaomi", model: "POCO X6 Pro", slug: "xiaomi-poco-x6-pro-price-nigeria-specs-review", price: 669999, rating: 8.6, specs: { ram: "12GB", storage: "512GB", battery: "5000mAh", display: "6.67 inches, AMOLED, 120Hz" } },
-  { brand: "OPPO", model: "Reno 11 Pro", slug: "oppo-reno-11-price-nigeria-specs-review", price: 0, rating: 8.6, specs: { ram: "8GB", storage: "256GB", battery: "5000mAh", display: "6.7 inches, AMOLED, 120Hz" } },
-  { brand: "OPPO", model: "A58", slug: "oppo-a58-price-nigeria-specs-review", price: 0, specs: { ram: "8GB", storage: "128GB", battery: "5000mAh", display: "6.72 inches, IPS LCD, 90Hz" } },
-  { brand: "Realme", model: "C75", slug: "realme-c75-price-nigeria-specs-review", price: 260499, rating: 8.0, specs: { ram: "8GB", storage: "128GB", battery: "6000mAh", display: "6.72 inches, IPS LCD, 90Hz" } },
-  { brand: "Realme", model: "Note 60", slug: "realme-note-60-price-nigeria-specs-review", price: 0, specs: { ram: "4GB", storage: "64GB", battery: "5000mAh", display: "6.74 inches, IPS LCD, 90Hz" } },
-  { brand: "Apple", model: "iPhone SE", slug: "apple-iphone-se-2025-price-nigeria-specs-review", price: 0, specs: { ram: "6GB", storage: "128GB", battery: "2018mAh", display: "4.7 inches, Retina IPS LCD, 60Hz" } },
-  { brand: "Apple", model: "iPhone 16", slug: "apple-iphone-16-price-nigeria-specs-review", price: 1195000, rating: 9.2, specs: { ram: "8GB", storage: "128GB", battery: "3561mAh", display: "6.1 inches, Super Retina XDR OLED, 60Hz" } },
+  { brand: "Tecno", model: "Spark 30 Pro", slug: "tecno-spark-30-price-nigeria-specs-review", price: 240000, imageUrl: "/thumbs/tecno-spark-30-price-nigeria-specs-review.webp", rating: 8.2, specs: { ram: "8GB", storage: "256GB", battery: "5000mAh", display: "6.67 inches, AMOLED, 120Hz" } },
+  { brand: "Tecno", model: "Spark 20", slug: "tecno-spark-20-price-nigeria-specs-review", price: 259999, imageUrl: "/thumbs/tecno-spark-20-price-nigeria-specs-review.webp", rating: 7.8, specs: { ram: "8GB", storage: "256GB", battery: "5000mAh", display: "6.6 inches, IPS LCD, 90Hz" } },
+  { brand: "Tecno", model: "Camon 30", slug: "tecno-camon-30-price-nigeria-specs-review", price: 409999, imageUrl: "/thumbs/tecno-camon-30-price-nigeria-specs-review.webp", rating: 8.1, specs: { ram: "12GB", storage: "256GB", battery: "5000mAh", display: "6.78 inches, AMOLED, 120Hz" } },
+  { brand: "Tecno", model: "Phantom V Flip2 5G", slug: "tecno-phantom-v-flip-price-nigeria-specs-review", price: 0, priceRange: "₦869,500–₦1,053,285", imageUrl: "/thumbs/tecno-phantom-v-flip-price-nigeria-specs-review.webp", specs: { ram: "8GB", storage: "256GB", battery: "4000mAh", display: "6.9 inches, Foldable AMOLED, 120Hz" } },
+  { brand: "Tecno", model: "Spark Go 2024", slug: "tecno-spark-go-2024-price-nigeria-specs-review", price: 0, priceRange: "₦141,400", imageUrl: "/thumbs/tecno-spark-go-2024-price-nigeria-specs-review.webp", specs: { ram: "3GB", storage: "64GB", battery: "5000mAh", display: "6.6 inches, IPS LCD, 90Hz" } },
+  { brand: "Tecno", model: "Pop 9", slug: "tecno-pop-9-price-nigeria-specs-review", price: 165000, imageUrl: "/thumbs/tecno-pop-9-price-nigeria-specs-review.webp", specs: { ram: "3GB", storage: "128GB", battery: "5000mAh", display: "6.67 inches, IPS LCD, 90Hz" } },
+  { brand: "Infinix", model: "Note 40 Pro", slug: "infinix-note-40-pro-price-nigeria-specs-review", price: 469999, imageUrl: "/thumbs/infinix-note-40-pro-price-nigeria-specs-review.webp", rating: 8.0, specs: { ram: "8GB", storage: "256GB", battery: "4600mAh", display: "6.78 inches, AMOLED, 120Hz" } },
+  { brand: "Infinix", model: "Hot 40i", slug: "infinix-hot-40i-price-nigeria-specs-review", price: 259999, imageUrl: "/thumbs/infinix-hot-40i-price-nigeria-specs-review.webp", specs: { ram: "8GB", storage: "128GB", battery: "5000mAh", display: "6.56 inches, IPS LCD, 90Hz" } },
+  { brand: "Infinix", model: "GT 20 Pro", slug: "infinix-gt-20-pro-price-nigeria-specs-review", price: 0, priceRange: "₦366,000–₦685,000", imageUrl: "/thumbs/infinix-gt-20-pro-price-nigeria-specs-review.webp", rating: 8.7, specs: { ram: "12GB", storage: "256GB", battery: "5000mAh", display: "6.67 inches, AMOLED, 144Hz" } },
+  { brand: "Infinix", model: "Smart 8", slug: "infinix-smart-8-pro-price-nigeria-specs-review", price: 131999, imageUrl: "/thumbs/infinix-smart-8-pro-price-nigeria-specs-review.webp", specs: { ram: "3GB", storage: "64GB", battery: "5000mAh", display: "6.6 inches, IPS LCD, 90Hz" } },
+  { brand: "Samsung", model: "Galaxy A16 5G", slug: "samsung-galaxy-a16-5g-price-nigeria-specs-review", price: 309999, imageUrl: "/thumbs/samsung-galaxy-a16-5g-price-nigeria-specs-review.webp", rating: 8.5, specs: { ram: "4GB", storage: "128GB", battery: "5000mAh", display: "6.7 inches, Super AMOLED, 90Hz" } },
+  { brand: "Samsung", model: "Galaxy A06", slug: "samsung-galaxy-a06-price-nigeria-specs-review", price: 118960, imageUrl: "/thumbs/samsung-galaxy-a06-price-nigeria-specs-review.webp", specs: { ram: "4GB", storage: "64GB", battery: "5000mAh", display: "6.7 inches, PLS LCD, 60Hz" } },
+  { brand: "Samsung", model: "Galaxy S24 FE", slug: "samsung-galaxy-s24-fe-price-nigeria-specs-review", price: 980000, imageUrl: "/thumbs/samsung-galaxy-s24-fe-price-nigeria-specs-review.webp", rating: 9.0, specs: { ram: "8GB", storage: "256GB", battery: "4700mAh", display: "6.7 inches, Dynamic AMOLED 2X, 120Hz" } },
+  { brand: "Xiaomi", model: "Redmi Note 14", slug: "xiaomi-redmi-note-14-price-nigeria-specs-review", price: 349999, imageUrl: "/thumbs/xiaomi-redmi-note-14-price-nigeria-specs-review.webp", rating: 8.4, specs: { ram: "6GB", storage: "128GB", battery: "5110mAh", display: "6.67 inches, AMOLED, 120Hz" } },
+  { brand: "Xiaomi", model: "Redmi 14C", slug: "xiaomi-redmi-14c-price-nigeria-specs-review", price: 245000, imageUrl: "/thumbs/xiaomi-redmi-14c-price-nigeria-specs-review.webp", specs: { ram: "8GB", storage: "256GB", battery: "5160mAh", display: "6.88 inches, IPS LCD, 120Hz" } },
+  { brand: "Xiaomi", model: "POCO X6 Pro", slug: "xiaomi-poco-x6-pro-price-nigeria-specs-review", price: 669999, imageUrl: "/thumbs/xiaomi-poco-x6-pro-price-nigeria-specs-review.webp", rating: 8.6, specs: { ram: "12GB", storage: "512GB", battery: "5000mAh", display: "6.67 inches, AMOLED, 120Hz" } },
+  { brand: "OPPO", model: "Reno 11 Pro", slug: "oppo-reno-11-price-nigeria-specs-review", price: 0, priceRange: "₦160,000–₦460,000", imageUrl: "/thumbs/oppo-reno-11-price-nigeria-specs-review.webp", rating: 8.6, specs: { ram: "8GB", storage: "256GB", battery: "5000mAh", display: "6.7 inches, AMOLED, 120Hz" } },
+  { brand: "OPPO", model: "A58", slug: "oppo-a58-price-nigeria-specs-review", price: 0, priceRange: "₦188,000–₦416,000", imageUrl: "/thumbs/oppo-a58-price-nigeria-specs-review.webp", specs: { ram: "8GB", storage: "128GB", battery: "5000mAh", display: "6.72 inches, IPS LCD, 90Hz" } },
+  { brand: "Realme", model: "C75", slug: "realme-c75-price-nigeria-specs-review", price: 260499, imageUrl: "/thumbs/realme-c75-price-nigeria-specs-review.webp", rating: 8.0, specs: { ram: "8GB", storage: "128GB", battery: "6000mAh", display: "6.72 inches, IPS LCD, 90Hz" } },
+  { brand: "Realme", model: "Note 60", slug: "realme-note-60-price-nigeria-specs-review", price: 0, priceRange: "₦80,000–₦160,000", imageUrl: "/thumbs/realme-note-60-price-nigeria-specs-review.webp", specs: { ram: "4GB", storage: "64GB", battery: "5000mAh", display: "6.74 inches, IPS LCD, 90Hz" } },
+  { brand: "Apple", model: "iPhone SE", slug: "apple-iphone-se-2025-price-nigeria-specs-review", price: 0, priceRange: "—", specs: { ram: "6GB", storage: "128GB", battery: "2018mAh", display: "4.7 inches, Retina IPS LCD, 60Hz" } },
+  { brand: "Apple", model: "iPhone 16", slug: "apple-iphone-16-price-nigeria-specs-review", price: 1195000, imageUrl: "/thumbs/apple-iphone-16-price-nigeria-specs-review.webp", rating: 9.2, specs: { ram: "8GB", storage: "128GB", battery: "3561mAh", display: "6.1 inches, Super Retina XDR OLED, 60Hz" } },
 ]
 
 export interface ArticleListing {

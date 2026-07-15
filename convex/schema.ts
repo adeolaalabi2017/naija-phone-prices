@@ -16,6 +16,9 @@ export default defineSchema({
     announcedDate: v.optional(v.string()),
     releaseDateNigeria: v.optional(v.string()),
     imageUrl: v.optional(v.string()),
+    priceRangeLabel: v.optional(v.string()),
+    priceRangeSource: v.optional(v.string()),
+    priceRangeSourceUrl: v.optional(v.string()),
     createdAt: v.number(),
     updatedAt: v.number(),
   })

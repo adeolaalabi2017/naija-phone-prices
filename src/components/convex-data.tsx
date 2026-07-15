@@ -20,6 +20,8 @@ export function PhonesGrid({ brand }: { brand?: string }) {
         model: p.model,
         slug: p.slug,
         price: p.latestPrice?.amount ?? 0,
+        imageUrl: p.imageUrl ?? undefined,
+        priceRange: (p as any).priceRangeLabel ?? undefined,
         rating: p.avgRating ?? undefined,
         specs: {
           ram: "",
@@ -37,6 +39,17 @@ export function PhonesGrid({ brand }: { brand?: string }) {
           href={`/phones/${phone.brand.toLowerCase()}/${phone.slug}`}
           className="group rounded-2xl border border-border bg-surface p-5 hover:border-accent transition-all"
         >
+          {phone.imageUrl && (
+            <div className="mb-4 flex items-center justify-center rounded-xl bg-white/95 h-40 overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={phone.imageUrl}
+                alt={`${phone.brand} ${phone.model}`}
+                loading="lazy"
+                className="h-full w-full object-contain p-2"
+              />
+            </div>
+          )}
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-medium text-text-tertiary uppercase tracking-wide">
               {phone.brand}
@@ -55,9 +68,19 @@ export function PhonesGrid({ brand }: { brand?: string }) {
             </div>
           )}
           <div className="flex items-center justify-between">
-            <span className="font-mono text-xl font-bold text-accent">
-              {phone.price ? formatPrice(phone.price) : "Price pending"}
-            </span>
+            {phone.price ? (
+              <span className="font-mono text-xl font-bold text-accent">
+                {formatPrice(phone.price)}
+              </span>
+            ) : phone.priceRange && phone.priceRange !== "—" ? (
+              <span className="font-mono text-sm font-semibold text-text-secondary">
+                {phone.priceRange}
+              </span>
+            ) : (
+              <span className="font-mono text-sm font-semibold text-text-tertiary">
+                Price pending
+              </span>
+            )}
             <span className="text-xs text-text-tertiary group-hover:text-accent transition-colors">
               View →
             </span>

@@ -14,6 +14,7 @@ interface PhoneDetailClientProps {
     imageUrl?: string
     announcedDate?: string
     releaseDateNigeria?: string
+    priceRange?: string
     createdAt: number
     updatedAt: number
   }
@@ -158,6 +159,15 @@ export function PhoneDetailClient({
                     lastUpdated={formatDate(latestPrice.recordedAt)}
                     size="lg"
                   />
+                ) : phone.priceRange ? (
+                  <div className="space-y-2">
+                    <div className="rounded-xl border border-dashed border-border p-4 text-sm text-text-secondary">
+                      Verified market range from other Nigerian sources: <span className="font-mono text-text-primary">{phone.priceRange}</span>
+                    </div>
+                    <p className="text-xs text-text-tertiary">
+                      No exact partner-store listing found yet, so we’re showing a market range instead.
+                    </p>
+                  </div>
                 ) : (
                   <div className="rounded-xl border border-dashed border-border p-4 text-sm text-text-secondary">
                     Price pending from verified partner stores.
