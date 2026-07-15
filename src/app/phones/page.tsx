@@ -1,6 +1,5 @@
 import Link from "next/link"
-import { formatPrice } from "@/lib/utils"
-import { databasePhones } from "@/lib/phone-data"
+import { PhonesGrid } from "@/components/convex-data"
 
 export const metadata = {
   title: "All Phone Prices in Nigeria (2026) — Tecno, Samsung, Infinix, iPhone",
@@ -9,8 +8,7 @@ export const metadata = {
 }
 
 export default function PhonesIndexPage() {
-  // Group by brand
-  const brands = Array.from(new Set(databasePhones.map((p) => p.brand))).sort()
+  const brands = ["Tecno", "Samsung", "Infinix", "Xiaomi", "OPPO", "Realme", "Apple"]
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -19,7 +17,7 @@ export default function PhonesIndexPage() {
           All Phone Prices in Nigeria
         </h1>
         <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-          Compare prices, specs, and reviews for every phone available in Nigeria. 
+          Compare prices, specs, and reviews for every phone available in Nigeria.
           Updated for 2026.
         </p>
       </header>
@@ -43,40 +41,8 @@ export default function PhonesIndexPage() {
         ))}
       </div>
 
-      {/* Phone grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {databasePhones.map((phone) => (
-          <Link
-            key={phone.slug}
-            href={`/phones/${phone.brand.toLowerCase()}/${phone.slug}`}
-            className="group rounded-2xl border border-border bg-surface p-5 hover:border-accent transition-all"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-medium text-text-tertiary uppercase tracking-wide">
-                {phone.brand}
-              </span>
-              {phone.rating && (
-                <span className="text-xs font-mono text-accent">★ {phone.rating}</span>
-              )}
-            </div>
-            <h3 className="font-display text-lg font-semibold text-text-primary group-hover:text-accent transition-colors mb-3">
-              {phone.model}
-            </h3>
-            <div className="space-y-1 text-sm text-text-secondary mb-4">
-              <p>{phone.specs.ram} RAM · {phone.specs.storage} Storage</p>
-              <p>{phone.specs.battery} Battery · {phone.specs.display.split(",")[0]}</p>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xl font-bold text-accent">
-                {formatPrice(phone.price)}
-              </span>
-              <span className="text-xs text-text-tertiary group-hover:text-accent transition-colors">
-                View →
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
+      {/* Live phone grid from Convex */}
+      <PhonesGrid />
     </div>
   )
 }

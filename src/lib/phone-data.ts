@@ -80,6 +80,7 @@ export interface ReviewListing {
   rating: number
   verdict: string
   author: string
+  price?: number
 }
 
 export const databaseReviews: ReviewListing[] = [

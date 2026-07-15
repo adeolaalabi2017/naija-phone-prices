@@ -22,7 +22,7 @@ export const getBySlug = query({
   handler: async (ctx, args) => {
     const article = await ctx.db
       .query("articles")
-      .filter((a) => a.slug === args.slug)
+      .filter((q) => q.eq(q.field("slug"), args.slug))
       .unique()
 
     return article

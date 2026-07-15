@@ -12,6 +12,7 @@ import type * as affiliate from "../affiliate.js";
 import type * as articles from "../articles.js";
 import type * as phones from "../phones.js";
 import type * as prices from "../prices.js";
+import type * as reviews from "../reviews.js";
 import type * as seed from "../seed.js";
 
 import type {
@@ -25,6 +26,7 @@ declare const fullApi: ApiFromModules<{
   articles: typeof articles;
   phones: typeof phones;
   prices: typeof prices;
+  reviews: typeof reviews;
   seed: typeof seed;
 }>;
 
