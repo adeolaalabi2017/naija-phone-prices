@@ -56,7 +56,7 @@ export function PhonesGrid({ brand }: { brand?: string }) {
           )}
           <div className="flex items-center justify-between">
             <span className="font-mono text-xl font-bold text-accent">
-              {phone.price ? formatPrice(phone.price) : "—"}
+              {phone.price ? formatPrice(phone.price) : "Price pending"}
             </span>
             <span className="text-xs text-text-tertiary group-hover:text-accent transition-colors">
               View →

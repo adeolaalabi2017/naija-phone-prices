@@ -39,7 +39,7 @@ interface PhoneDetailClientProps {
     source: string
     sourceUrl: string
     recordedAt: number
-  }
+  } | null
   review: {
     title: string
     content: string
@@ -66,23 +66,25 @@ export function PhoneDetailClient({
   review,
   alternatives,
 }: PhoneDetailClientProps) {
-  const affiliateLinks = [
-    {
-      retailer: "cybervilla",
-      url: `https://cybervilla.io/product/${phone.slug}`,
-      price: latestPrice.amount,
-    },
-    {
-      retailer: "slot",
-      url: `https://slot.ng/${phone.slug}`,
-      price: latestPrice.amount + 2000,
-    },
-    {
-      retailer: "jumia",
-      url: `https://jumia.com.ng/${phone.slug}`,
-      price: latestPrice.amount + 5000,
-    },
-  ]
+  const affiliateLinks = latestPrice
+    ? [
+        {
+          retailer: "cybervilla",
+          url: `https://cybervilla.io/product/${phone.slug}`,
+          price: latestPrice.amount,
+        },
+        {
+          retailer: "slot",
+          url: `https://slot.ng/${phone.slug}`,
+          price: latestPrice.amount + 2000,
+        },
+        {
+          retailer: "jumia",
+          url: `https://jumia.com.ng/${phone.slug}`,
+          price: latestPrice.amount + 5000,
+        },
+      ]
+    : []
 
   return (
     <article className="flex flex-col">
@@ -149,19 +151,31 @@ export function PhoneDetailClient({
               {/* Price Section */}
               <div className="bg-surface border border-border rounded-2xl p-5">
                 <p className="text-xs text-text-secondary uppercase tracking-wider mb-2">Current Price in Nigeria</p>
-                <PriceTag
-                  amount={latestPrice.amount}
-                  source={latestPrice.source}
-                  lastUpdated={formatDate(latestPrice.recordedAt)}
-                  size="lg"
-                />
+                {latestPrice ? (
+                  <PriceTag
+                    amount={latestPrice.amount}
+                    source={latestPrice.source}
+                    lastUpdated={formatDate(latestPrice.recordedAt)}
+                    size="lg"
+                  />
+                ) : (
+                  <div className="rounded-xl border border-dashed border-border p-4 text-sm text-text-secondary">
+                    Price pending from verified partner stores.
+                  </div>
+                )}
               </div>
 
               {/* Affiliate CTAs */}
-              <AffiliateCTA
-                phoneName={`${phone.brand} ${phone.model}`}
-                links={affiliateLinks}
-              />
+              {affiliateLinks.length > 0 ? (
+                <AffiliateCTA
+                  phoneName={`${phone.brand} ${phone.model}`}
+                  links={affiliateLinks}
+                />
+              ) : (
+                <div className="rounded-2xl border border-border bg-surface p-5 text-sm text-text-secondary">
+                  Affiliate links will appear after we verify a partner-store price.
+                </div>
+              )}
 
               {/* Quick Specs */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -234,21 +248,29 @@ export function PhoneDetailClient({
                 {/* Sidebar Price Card */}
                 <div className="bg-surface border border-border rounded-2xl p-5">
                   <p className="text-xs text-text-secondary uppercase tracking-wider mb-2">Buy Now</p>
-                  <PriceTag amount={latestPrice.amount} size="lg" />
-                  <div className="mt-4 space-y-2">
-                    {affiliateLinks.map((link) => (
-                      <a
-                        key={link.retailer}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer sponsored"
-                        className="flex items-center justify-between p-3 rounded-xl bg-surface-raised border border-border hover:border-accent/30 transition-all"
-                      >
-                        <span className="text-sm font-medium text-text-primary capitalize">{link.retailer}</span>
-                        <span className="text-xs text-accent font-medium">Buy →</span>
-                      </a>
-                    ))}
-                  </div>
+                  {latestPrice ? (
+                    <>
+                      <PriceTag amount={latestPrice.amount} size="lg" />
+                      <div className="mt-4 space-y-2">
+                        {affiliateLinks.map((link) => (
+                          <a
+                            key={link.retailer}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer sponsored"
+                            className="flex items-center justify-between p-3 rounded-xl bg-surface-raised border border-border hover:border-accent/30 transition-all"
+                          >
+                            <span className="text-sm font-medium text-text-primary capitalize">{link.retailer}</span>
+                            <span className="text-xs text-accent font-medium">Buy →</span>
+                          </a>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <div className="rounded-xl border border-dashed border-border p-4 text-sm text-text-secondary">
+                      Partner-store price pending.
+                    </div>
+                  )}
                 </div>
 
                 {/* Alternatives */}
