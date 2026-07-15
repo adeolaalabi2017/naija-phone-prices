@@ -14,6 +14,8 @@ import type * as phones from "../phones.js";
 import type * as prices from "../prices.js";
 import type * as reviews from "../reviews.js";
 import type * as seed from "../seed.js";
+import type * as syncVerified from "../syncVerified.js";
+import type * as syncVerifiedContent from "../syncVerifiedContent.js";
 
 import type {
   ApiFromModules,
@@ -28,6 +30,8 @@ declare const fullApi: ApiFromModules<{
   prices: typeof prices;
   reviews: typeof reviews;
   seed: typeof seed;
+  syncVerified: typeof syncVerified;
+  syncVerifiedContent: typeof syncVerifiedContent;
 }>;
 
 /**
