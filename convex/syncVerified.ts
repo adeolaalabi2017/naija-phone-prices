@@ -11,17 +11,14 @@ const VERIFIED = [
   { slug: "samsung-galaxy-a16-5g-price-nigeria-specs-review", model: "Galaxy A16 5G", price: 309999, source: "Jumia Nigeria", sourceUrl: "https://www.jumia.com.ng/samsung-galaxy-a16-5g-6.7-128gb4gb-dual-sim-fingerprint-5000mah-blue-black-400689151.html" },
   { slug: "samsung-galaxy-a06-price-nigeria-specs-review", model: "Galaxy A06", price: 118960, source: "Jumia Nigeria", sourceUrl: "https://www.jumia.com.ng/samsung-galaxy-a06-6.7-4gb-ram64gb-rom-android-14-black-401614385.html" },
   { slug: "samsung-galaxy-s24-fe-price-nigeria-specs-review", model: "Galaxy S24 FE", price: 980000, source: "Jumia Nigeria", sourceUrl: "https://www.jumia.com.ng/samsung-galaxy-s24-fe-dual-sim-8gb-ram-256gb-5g-gray-411206138.html" },
-  { slug: "xiaomi-redmi-14c-price-nigeria-specs-review", model: "Redmi 14C", price: 245000, source: "Jumia Nigeria", sourceUrl: "https://www.jumia.com.ng/xiaomi-redmi-14c-6.88-8gb-ram256gb-rom-419376587.html" },
-  { slug: "realme-c75-price-nigeria-specs-review", model: "C75", price: 260499, source: "Jumia Nigeria", sourceUrl: "https://www.jumia.com.ng/realme-c75-6.748128gb50mp8mpandroid5828mah-storm-black-410830670.html" },
-  { slug: "apple-iphone-16-price-nigeria-specs-review", model: "iPhone 16", price: 1195000, source: "Jumia Nigeria", sourceUrl: "https://www.jumia.com.ng/iphone-16-6.1-128gb-rom-8gb-ram-single-nano-sim-ios-18-teal-apple-mpg11841798.html" },
+  { slug: "xiaomi-redmi-note-14-price-nigeria-specs-review", model: "Redmi Note 14", price: 349999, source: "Jumia Nigeria", sourceUrl: "https://www.jumia.com.ng/xiaomi-redmi-note-14-6.67-6gb-ram128gb-rom.5110mah-ocean-blue-419393433.html" },
+  { slug: "xiaomi-poco-x6-pro-price-nigeria-specs-review", model: "POCO X6 Pro", price: 669999, source: "Jumia Nigeria", sourceUrl: "https://www.jumia.com.ng/x6-pro-5g-6.67-512gb12gb-dual-sim-5000mah-grey-poco-mpg11144267.html" },
 ]
 
 const PENDING = [
   { slug: "tecno-phantom-v-flip-price-nigeria-specs-review", model: "Phantom V Flip2 5G" },
   { slug: "tecno-spark-go-2024-price-nigeria-specs-review", model: "Spark Go" },
   { slug: "infinix-gt-20-pro-price-nigeria-specs-review", model: "GT 20 Pro" },
-  { slug: "xiaomi-redmi-note-14-price-nigeria-specs-review", model: "Redmi Note 14" },
-  { slug: "xiaomi-poco-x6-pro-price-nigeria-specs-review", model: "POCO X6 Pro" },
   { slug: "oppo-reno-11-price-nigeria-specs-review", model: "Reno 11 Pro" },
   { slug: "oppo-a58-price-nigeria-specs-review", model: "A58" },
   { slug: "realme-note-60-price-nigeria-specs-review", model: "Note 60" },
