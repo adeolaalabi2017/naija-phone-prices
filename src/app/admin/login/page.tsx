@@ -121,9 +121,9 @@ export default function AdminLoginPage() {
         </form>
 
         <p className="text-center text-xs text-text-tertiary mt-4">
-          <a href="/" className="hover:text-accent transition-colors">
+          <Link href="/" className="hover:text-accent transition-colors">
             ← Back to site
-          </a>
+          </Link>
         </p>
       </div>
     </div>

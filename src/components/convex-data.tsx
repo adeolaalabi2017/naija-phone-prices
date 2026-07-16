@@ -21,7 +21,7 @@ export function PhonesGrid({ brand }: { brand?: string }) {
         slug: p.slug,
         price: p.latestPrice?.amount ?? 0,
         imageUrl: p.imageUrl ?? undefined,
-        priceRange: (p as any).priceRangeLabel ?? undefined,
+        priceRange: (p as { priceRangeLabel?: string }).priceRangeLabel ?? undefined,
         rating: p.avgRating ?? undefined,
         specs: {
           ram: "",

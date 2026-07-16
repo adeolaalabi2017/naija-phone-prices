@@ -53,13 +53,13 @@ export default function AdminPhonesPage() {
             Manage phone prices, specs, and reviews
           </p>
         </div>
-        <a
+        <Link
           href="/admin/phones/new"
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-accent text-background font-semibold text-sm hover:bg-accent-hover transition-colors"
         >
           <Plus className="w-4 h-4" />
           Add Phone
-        </a>
+        </Link>
       </div>
 
       {/* Filters */}

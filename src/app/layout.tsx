@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { ConvexClientProvider } from "@/lib/convex"
+import Link from "next/link"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -85,25 +86,25 @@ export default function RootLayout({
           <div className="min-h-screen flex flex-col">
             <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
               <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                <a href="/" className="flex items-center gap-2">
+                <Link href="/" className="flex items-center gap-2">
                   <img src="/icon-mark.png" alt="NaijaPhonePrices" width={32} height={32} className="w-8 h-8 rounded-lg" />
                   <span className="font-display font-bold text-xl text-text-primary">
                     NaijaPhone<span className="text-accent">Prices</span>
                   </span>
-                </a>
+                </Link>
                 <nav className="hidden md:flex items-center gap-6">
-                  <a href="/phones" className="text-sm text-text-secondary hover:text-accent transition-colors">
+                  <Link href="/phones" className="text-sm text-text-secondary hover:text-accent transition-colors">
                     Phones
-                  </a>
-                  <a href="/guides" className="text-sm text-text-secondary hover:text-accent transition-colors">
+                  </Link>
+                  <Link href="/guides" className="text-sm text-text-secondary hover:text-accent transition-colors">
                     Buying Guides
-                  </a>
-                  <a href="/comparisons" className="text-sm text-text-secondary hover:text-accent transition-colors">
+                  </Link>
+                  <Link href="/comparisons" className="text-sm text-text-secondary hover:text-accent transition-colors">
                     Comparisons
-                  </a>
-                  <a href="/reviews" className="text-sm text-text-secondary hover:text-accent transition-colors">
+                  </Link>
+                  <Link href="/reviews" className="text-sm text-text-secondary hover:text-accent transition-colors">
                     Reviews
-                  </a>
+                  </Link>
                 </nav>
                 <div className="flex items-center gap-3">
                   <button className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border text-sm text-text-secondary hover:border-accent hover:text-accent transition-colors">
@@ -135,9 +136,9 @@ export default function RootLayout({
                     <ul className="space-y-2">
                       {["All Phones", "Tecno", "Samsung", "Infinix", "iPhone", "Xiaomi"].map((brand) => (
                         <li key={brand}>
-                          <a href={`/phones/${brand.toLowerCase()}`} className="text-sm text-text-secondary hover:text-accent transition-colors">
+                          <Link href={`/phones/${brand.toLowerCase()}`} className="text-sm text-text-secondary hover:text-accent transition-colors">
                             {brand}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -147,9 +148,9 @@ export default function RootLayout({
                     <ul className="space-y-2">
                       {["Best Under ₦50K", "Best Under ₦100K", "Best Under ₦200K", "5G Phones", "Camera Phones"].map((guide) => (
                         <li key={guide}>
-                          <a href={`/guides/${guide.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} className="text-sm text-text-secondary hover:text-accent transition-colors">
+                          <Link href={`/guides/${guide.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} className="text-sm text-text-secondary hover:text-accent transition-colors">
                             {guide}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>

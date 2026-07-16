@@ -4,6 +4,7 @@ import { RatingBadge, ProsCons } from "@/components/phones/RatingBadge"
 import { AffiliateCTA } from "@/components/phones/AffiliateCTA"
 import { formatPrice, formatDate } from "@/lib/utils"
 import { Battery, Cpu, Monitor, Camera, Smartphone, ShieldCheck } from "lucide-react"
+import Link from "next/link"
 
 interface PhoneDetailClientProps {
   phone: {
@@ -94,13 +95,13 @@ export function PhoneDetailClient({
         <div className="container mx-auto px-4 py-8 md:py-12">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-text-secondary mb-6">
-            <a href="/" className="hover:text-accent transition-colors">Home</a>
+            <Link href="/" className="hover:text-accent transition-colors">Home</Link>
             <span>/</span>
-            <a href="/phones" className="hover:text-accent transition-colors">Phones</a>
+            <Link href="/phones" className="hover:text-accent transition-colors">Phones</Link>
             <span>/</span>
-            <a href={`/phones/${phone.brand.toLowerCase()}`} className="hover:text-accent transition-colors">
+            <Link href={`/phones/${phone.brand.toLowerCase()}`} className="hover:text-accent transition-colors">
               {phone.brand}
-            </a>
+            </Link>
             <span>/</span>
             <span className="text-text-tertiary">{phone.model}</span>
           </nav>

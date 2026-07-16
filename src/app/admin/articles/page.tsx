@@ -51,13 +51,13 @@ export default function AdminArticlesPage() {
             Write and manage reviews, guides, and comparisons
           </p>
         </div>
-        <a
+        <Link
           href="/admin/articles/new"
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-accent text-background font-semibold text-sm hover:bg-accent-hover transition-colors"
         >
           <Plus className="w-4 h-4" />
           Write Article
-        </a>
+        </Link>
       </div>
 
       {/* Filters */}

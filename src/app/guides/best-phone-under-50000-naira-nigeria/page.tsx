@@ -220,7 +220,7 @@ export default function BestUnder50000Page() {
                   </div>
                 </div>
                 <p className="text-text-secondary mb-4">
-                  The Tecno Spark 30 is the best phone under ₦50,000 in Nigeria right now. It delivers a stunning 120Hz AMOLED display that you'd typically only find on phones twice the price, a massive 5000mAh battery that lasts all day, and 256GB of storage that means you'll never run out of space for your photos, apps, and music.
+                  The Tecno Spark 30 is the best phone under ₦50,000 in Nigeria right now. It delivers a stunning 120Hz AMOLED display that you&apos;d typically only find on phones twice the price, a massive 5000mAh battery that lasts all day, and 256GB of storage that means you&apos;ll never run out of space for your photos, apps, and music.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
@@ -251,20 +251,20 @@ export default function BestUnder50000Page() {
                 How We Picked These Phones
               </h2>
               <p className="text-text-secondary leading-relaxed mb-6">
-                Every phone on this list has been thoroughly tested by our team in Lagos. We evaluate each device based on real-world performance, camera quality, battery life, build quality, and value for money. We also cross-reference prices with major Nigerian retailers to ensure you're getting the most accurate, up-to-date information.
+                Every phone on this list has been thoroughly tested by our team in Lagos. We evaluate each device based on real-world performance, camera quality, battery life, build quality, and value for money. We also cross-reference prices with major Nigerian retailers to ensure you&apos;re getting the most accurate, up-to-date information.
               </p>
               <h2 className="font-display text-2xl font-bold text-text-primary mb-4">
                 What to Look for in a ₦50,000 Phone
               </h2>
               <p className="text-text-secondary leading-relaxed mb-4">
-                At the ₦50,000 price point, you're entering the budget-to-midrange territory. Here's what matters most:
+                At the ₦50,000 price point, you&apos;re entering the budget-to-midrange territory. Here&apos;s what matters most:
               </p>
               <ul className="text-text-secondary space-y-2 mb-6">
                 <li><strong className="text-text-primary">Battery:</strong> Look for 5000mAh minimum — Nigerian power outages mean you need a phone that lasts all day</li>
                 <li><strong className="text-text-primary">Display:</strong> 90Hz or 120Hz refresh rate is becoming standard — it makes everything feel smoother</li>
                 <li><strong className="text-text-primary">Storage:</strong> 128GB minimum — Nigerian apps like 2go and TikTok cache a lot of data</li>
                 <li><strong className="text-text-primary">RAM:</strong> 4GB minimum for smooth multitasking; 6GB+ is ideal</li>
-                <li><strong className="text-text-primary">Camera:</strong> 50MP is now standard even in budget phones — don't settle for less</li>
+                <li><strong className="text-text-primary">Camera:</strong> 50MP is now standard even in budget phones — don&apos;t settle for less</li>
               </ul>
               <h2 className="font-display text-2xl font-bold text-text-primary mb-4">
                 Should You Buy Now or Wait?

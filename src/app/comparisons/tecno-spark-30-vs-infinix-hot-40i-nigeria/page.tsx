@@ -154,9 +154,9 @@ export default function ComparisonPage() {
         <div className="container mx-auto px-4 py-10 md:py-14">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 text-sm text-text-secondary mb-4">
-              <a href="/" className="hover:text-accent transition-colors">Home</a>
+              <Link href="/" className="hover:text-accent transition-colors">Home</Link>
               <span>/</span>
-              <a href="/comparisons" className="hover:text-accent transition-colors">Comparisons</a>
+              <Link href="/comparisons" className="hover:text-accent transition-colors">Comparisons</Link>
               <span>/</span>
               <span className="text-text-tertiary">VS</span>
             </div>

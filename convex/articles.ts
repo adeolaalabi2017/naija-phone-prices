@@ -4,7 +4,7 @@ import { v } from "convex/values"
 export const list = query({
   args: { type: v.optional(v.string()) },
   handler: async (ctx, args) => {
-    let articlesQuery = ctx.db.query("articles")
+    const articlesQuery = ctx.db.query("articles")
 
     const allArticles = await articlesQuery.collect()
 

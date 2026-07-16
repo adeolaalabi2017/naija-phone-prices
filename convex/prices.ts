@@ -4,7 +4,7 @@ import { v } from "convex/values"
 export const list = query({
   args: { phoneId: v.optional(v.id("phones")) },
   handler: async (ctx, args) => {
-    let pricesQuery = ctx.db.query("prices")
+    const pricesQuery = ctx.db.query("prices")
     const allPrices = await pricesQuery.collect()
 
     // Filter by phoneId if provided
