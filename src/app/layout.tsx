@@ -85,9 +85,7 @@ export default function RootLayout({
             <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
               <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 <a href="/" className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-                    <span className="text-background font-bold text-sm">NP</span>
-                  </div>
+                  <img src="/icon-mark.png" alt="NaijaPhonePrices" width={32} height={32} className="w-8 h-8 rounded-lg" />
                   <span className="font-display font-bold text-xl text-text-primary">
                     NaijaPhone<span className="text-accent">Prices</span>
                   </span>
@@ -122,9 +120,7 @@ export default function RootLayout({
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                   <div className="md:col-span-2">
                     <div className="flex items-center gap-2 mb-4">
-                      <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-                        <span className="text-background font-bold text-sm">NP</span>
-                      </div>
+                      <img src="/icon-mark.png" alt="NaijaPhonePrices" width={32} height={32} className="w-8 h-8 rounded-lg" />
                       <span className="font-display font-bold text-xl">
                         NaijaPhone<span className="text-accent">Prices</span>
                       </span>
