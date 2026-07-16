@@ -22,6 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://naija-phone-prices.alabiadeolamikel.workers.dev"),
   title: {
     default: "NaijaPhonePrices — Phone Prices in Nigeria | Specs & Reviews",
     template: "%s | NaijaPhonePrices",
