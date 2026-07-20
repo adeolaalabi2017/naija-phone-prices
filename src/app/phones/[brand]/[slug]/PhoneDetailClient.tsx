@@ -42,6 +42,7 @@ interface PhoneDetailClientProps {
     sourceUrl: string
     recordedAt: number
   } | null
+  priceHistory?: Array<{ amount: number; recordedAt: number }>
   review: {
     title: string
     content: string
@@ -65,9 +66,22 @@ export function PhoneDetailClient({
   phone,
   specs,
   latestPrice,
+  priceHistory,
   review,
   alternatives,
 }: PhoneDetailClientProps) {
+  // Price-drop delta: compare latest to the immediately previous record.
+  const sortedHistory = (priceHistory ?? [])
+    .slice()
+    .sort((a, b) => b.recordedAt - a.recordedAt)
+  const previousPrice =
+    latestPrice && sortedHistory.length > 1 ? sortedHistory[1].amount : null
+  const priceDelta =
+    latestPrice && previousPrice ? latestPrice.amount - previousPrice : null
+  const pricePeak = sortedHistory.length
+    ? Math.max(...sortedHistory.map((p) => p.amount))
+    : null
+
   const affiliateLinks = latestPrice
     ? [
         {
@@ -176,7 +190,51 @@ export function PhoneDetailClient({
                 )}
               </div>
 
-              {/* Affiliate CTAs */}
+              {/* Price drop / history */}
+              {latestPrice && priceDelta !== null && priceDelta !== 0 && (
+                <div
+                  className={`rounded-xl border p-3 text-sm ${
+                    priceDelta < 0
+                      ? "border-green-500/20 bg-green-500/10 text-green-500"
+                      : "border-red-500/20 bg-red-500/10 text-red-500"
+                  }`}
+                >
+                  {priceDelta < 0 ? "▼ Price dropped " : "▲ Price rose "}
+                  {formatPrice(Math.abs(priceDelta))} since last check
+                  {pricePeak && pricePeak > latestPrice.amount && (
+                    <span className="ml-1 text-text-tertiary">
+                      · {formatPrice(pricePeak - latestPrice.amount)} below peak
+                    </span>
+                  )}
+                </div>
+              )}
+              {sortedHistory.length > 1 && (
+                <div className="rounded-2xl border border-border bg-surface p-5">
+                  <p className="text-xs text-text-secondary uppercase tracking-wider mb-3">
+                    Price History
+                  </p>
+                  <ul className="space-y-2">
+                    {sortedHistory.slice(0, 6).map((h, i) => (
+                      <li
+                        key={h.recordedAt}
+                        className="flex items-center justify-between text-sm"
+                      >
+                        <span className="text-text-tertiary">
+                          {formatDate(h.recordedAt)}
+                        </span>
+                        <span
+                          className={`font-mono ${
+                            i === 0 ? "text-accent font-semibold" : "text-text-secondary"
+                          }`}
+                        >
+                          {formatPrice(h.amount)}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {affiliateLinks.length > 0 ? (
                 <AffiliateCTA
                   phoneName={`${phone.brand} ${phone.model}`}

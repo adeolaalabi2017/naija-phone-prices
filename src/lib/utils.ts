@@ -30,6 +30,27 @@ export function formatDate(date: Date | string | number): string {
   }).format(new Date(date))
 }
 
+export function formatRelativeDate(date: Date | string | number): string {
+  const then = new Date(date).getTime()
+  const now = Date.now()
+  const diffMs = Math.max(0, now - then)
+  const day = 86400000
+  const days = Math.floor(diffMs / day)
+  if (days === 0) return "today"
+  if (days === 1) return "yesterday"
+  if (days < 7) return `${days} days ago`
+  if (days < 30) {
+    const w = Math.floor(days / 7)
+    return `${w} week${w > 1 ? "s" : ""} ago`
+  }
+  if (days < 365) {
+    const m = Math.floor(days / 30)
+    return `${m} month${m > 1 ? "s" : ""} ago`
+  }
+  const y = Math.floor(days / 365)
+  return `${y} year${y > 1 ? "s" : ""} ago`
+}
+
 export function getRatingColor(rating: number): string {
   if (rating >= 8) return "text-green-500"
   if (rating >= 6) return "text-yellow-500"

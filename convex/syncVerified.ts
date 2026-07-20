@@ -53,18 +53,26 @@ export const syncVerifiedData = mutation({
         updatedAt: Date.now(),
       })
 
-      for (const price of prices.filter((p) => p.phoneId === phone._id)) {
-        await ctx.db.delete(price._id)
-      }
+      // Append-on-change: preserve price history. Only insert a new price
+      // row when the amount actually differs from the most recent record.
+      const existing = prices
+        .filter((p) => p.phoneId === phone._id)
+        .sort((a, b) => b.recordedAt - a.recordedAt)
+      const mostRecent = existing[0]
 
-      await ctx.db.insert("prices", {
-        phoneId: phone._id,
-        amount: item.price,
-        currency: "NGN",
-        source: item.source,
-        sourceUrl: item.sourceUrl,
-        recordedAt: Date.now(),
-      })
+      if (!mostRecent || mostRecent.amount !== item.price) {
+        await ctx.db.insert("prices", {
+          phoneId: phone._id,
+          amount: item.price,
+          currency: "NGN",
+          source: item.source,
+          sourceUrl: item.sourceUrl,
+          recordedAt: Date.now(),
+        })
+      } else {
+        // Same price — just refresh the "verified" timestamp.
+        await ctx.db.patch(mostRecent._id, { recordedAt: Date.now() })
+      }
     }
 
     for (const item of PENDING) {

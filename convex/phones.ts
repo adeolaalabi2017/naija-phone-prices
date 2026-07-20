@@ -45,7 +45,7 @@ export const list = query({
         return {
           ...phone,
           latestPrice: latestPrice
-            ? { amount: latestPrice.amount, source: latestPrice.source }
+            ? { amount: latestPrice.amount, source: latestPrice.source, recordedAt: latestPrice.recordedAt }
             : null,
           avgRating,
           reviewCount: phoneReviews.length,

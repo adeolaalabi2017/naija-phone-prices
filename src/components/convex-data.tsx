@@ -3,7 +3,7 @@
 import { useQuery } from "convex/react"
 import { api } from "../../convex/_generated/api"
 import { databasePhones, databaseArticles, databaseReviews, databaseComparisons } from "@/lib/phone-data"
-import { formatPrice } from "@/lib/utils"
+import { formatPrice, formatRelativeDate } from "@/lib/utils"
 import Link from "next/link"
 import { Star, ArrowRight, Clock, GitCompare, Smartphone } from "lucide-react"
 
@@ -20,6 +20,7 @@ export function PhonesGrid({ brand }: { brand?: string }) {
         model: p.model,
         slug: p.slug,
         price: p.latestPrice?.amount ?? 0,
+        verifiedAt: p.latestPrice?.recordedAt ?? undefined,
         imageUrl: p.imageUrl ?? undefined,
         priceRange: (p as { priceRangeLabel?: string }).priceRangeLabel ?? undefined,
         rating: p.avgRating ?? undefined,
@@ -29,7 +30,20 @@ export function PhonesGrid({ brand }: { brand?: string }) {
           battery: "",
         },
       }))
-    : databasePhones.filter((p) => !brand || p.brand.toLowerCase() === brand.toLowerCase())
+    : databasePhones
+        .filter((p) => !brand || p.brand.toLowerCase() === brand.toLowerCase())
+        .map((p) => ({
+          brand: p.brand,
+          model: p.model,
+          slug: p.slug,
+          price: p.price,
+          verifiedAt: undefined as number | undefined,
+          imageUrl: p.imageUrl,
+          priceRange: p.priceRange,
+          rating: p.rating,
+          specs: p.specs,
+        }))
+
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -85,6 +99,12 @@ export function PhonesGrid({ brand }: { brand?: string }) {
               View →
             </span>
           </div>
+          {phone.price && phone.verifiedAt && (
+            <p className="mt-2 flex items-center gap-1 text-[10px] text-text-tertiary">
+              <Clock className="w-3 h-3" />
+              Verified {formatRelativeDate(phone.verifiedAt)}
+            </p>
+          )}
         </Link>
       ))}
     </div>

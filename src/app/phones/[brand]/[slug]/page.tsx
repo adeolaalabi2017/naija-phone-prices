@@ -1,4 +1,6 @@
 import { PhoneDetailClient } from "./PhoneDetailClient"
+import type { Metadata } from "next"
+import { formatPrice } from "@/lib/utils"
 
 // Static data for the device page — in production this comes from Convex
 const PHONE_DATA = {
@@ -108,6 +110,58 @@ Android 14 with HiOS 14 brings plenty of customisation options. There are some p
 
 export const revalidate = 3600 // Revalidate every hour
 
+const { phone, specs, latestPrice, review } = PHONE_DATA
+
+export const metadata: Metadata = {
+  title: `${phone.brand} ${phone.model} Price in Nigeria — Specs & Review`,
+  description: `${phone.brand} ${phone.model} price in Nigeria: ${formatPrice(
+    latestPrice.amount
+  )}. ${specs.display}, ${specs.ram} RAM, ${specs.storage}, ${specs.battery}. Full specs, honest review (${review.rating}/10), and where to buy.`,
+  alternates: {
+    canonical: `/phones/${phone.brand.toLowerCase()}/${phone.slug}`,
+  },
+  openGraph: {
+    title: `${phone.brand} ${phone.model} — ${formatPrice(latestPrice.amount)}`,
+    description: `${phone.brand} ${phone.model} price in Nigeria, full specs and review.`,
+    type: "article",
+  },
+}
+
+function ProductJsonLd() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: `${phone.brand} ${phone.model}`,
+    brand: { "@type": "Brand", name: phone.brand },
+    description: `${phone.brand} ${phone.model} — ${specs.display}, ${specs.ram} RAM, ${specs.storage} storage, ${specs.battery} battery.`,
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "NGN",
+      price: latestPrice.amount,
+      availability: "https://schema.org/InStock",
+      url: latestPrice.sourceUrl,
+      seller: { "@type": "Organization", name: latestPrice.source },
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: review.rating,
+      bestRating: 10,
+      ratingCount: 1,
+    },
+  }
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  )
+}
+
 export default function PhonePage() {
-  return <PhoneDetailClient {...PHONE_DATA} />
+  return (
+    <>
+      <ProductJsonLd />
+      <PhoneDetailClient {...PHONE_DATA} />
+    </>
+  )
 }
